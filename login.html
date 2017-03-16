@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>os login page</title>
+    <link href="gem.png" rel="shortcut icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.5/addons/p5.dom.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="jquery.ui.touch-punch.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="../ckeditor/ckeditor.js"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <!-- drop down imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/dropdown.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/dropdown.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/divider.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/menu.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/icon.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/components/item.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.7/semantic.css">
+    <!-- own styles overwriting others-->
+    <link rel="stylesheet" href="os.css">
+</head>
+
+<body>
+    <div id="os" style="position: absolute; top: 0px; left: 0px;">
+        <!-- apps -->
+        <div class="app" style="position: absolute; left: 10px; top: 10px;" id="notepadlogo">
+            <img class="applogo" src="notepad.png" width="75" height="75">
+            <p class="apptext" style="background-color: rgba(0,0,0,50); color:white; border-radius: 4px; margin-top:3px">Notepad</p>
+        </div>
+        <div class="app" style="position: absolute; left: 10px; top: 105px;" id="explorerlogo">
+            <img class="applogo" src="explorer.png" width="75" height="75">
+            <p class="apptext" style="background-color: rgba(0,0,0,50); color:white; border-radius: 4px; margin-top:3px">File Explorer</p>
+        </div>
+        <!--
+      <div class="app" style="position: absolute; left: 10px; top: 205px;" id="droplogo">
+          <img class="applogo" src="drop.png" width="65" height="65">
+          <p class="apptext">Drop files</p>
+      </div>-->
+        <div class="app" style="position: absolute; left: 105px; top: 10px;" id="imglogo">
+            <img class="applogo" src="photov.png" width="75" height="75">
+            <p class="apptext">Photo viewer</p>
+        </div>
+        <!--
+      <div class="app" style="position: absolute; left: 10px; top: 380px;" id="img_editorlogo">
+          <img class="applogo" src="imge.jpg" width="75" height="75">
+          <p class="apptext">Image editor</p>
+      </div>
+    -->
+        <div class="app" style="position: absolute; left: 105px; top: 105px;" id="browserlogo">
+            <img class="applogo" src="browser.png" width="75" height="75">
+            <p class="apptext" style="background-color: rgba(0,0,0,50); color:white; border-radius: 4px; margin-top:3px">Browser</p>
+        </div>
+        <div class="app" style="position: absolute; left: 10px; top: 205px;" id="settingslogo">
+            <img class="applogo" src="settings.png" width="75" height="75">
+            <p class="apptext" style="background-color: rgba(0,0,0,50); color:white; border-radius: 4px; margin-top:3px">Settings</p>
+        </div>
+        <div class="app" style="position: absolute; left: 10px; top: 300px;" id="storelogo">
+            <img class="applogo" src="appstore.png" width="75" height="75">
+            <p class="apptext" style="background-color: rgba(0,0,0,50); color:white; border-radius: 4px; margin-top:3px">OS Store</p>
+        </div>
+        <div class="app" style="position: absolute; left: 105px; top: 205px;" id="calclogo">
+            <img class="applogo" src="calc.png" width="75" height="75">
+            <p class="apptext" style="background-color: rgba(0,0,0,50); color:white; border-radius: 4px; margin-top:3px">Calculator</p>
+        </div><!--
+        <div class="app" style="position: absolute; left: 105px; top: 300px;" id="gamelogo">
+            <img class="applogo" src="games.png" width="75" height="75">
+            <p class="apptext" style="background-color: rgba(0,0,0,50); color:white; border-radius: 4px; margin-top:3px">Game Hub</p>
+        </div>
+-->
+        <img id="logo" src="logo.PNG" style="position:absolute; top:43%; left:43%">
+
+        <div class="taskbar" style="position: absolute; width: 1305px; height: 40px; top: 582px; left: 0px;">
+
+            <!--start dropdown -->
+            <div class="ui dropdown">
+                <div class="text"><img id="home" src="home.png" style="width:38px;height:40px;"></div>
+                <div class="menu" id="home_drop">
+                    <div class="item" onclick="firebase.auth().signOut(); location.reload()">
+                        Sign out
+                    </div>
+                    <div class="item" onclick="window.location.href = 'index.html';">
+                        Shut down
+                    </div>
+                    <div class="item" onclick="location.reload()">
+                        Restart
+                    </div>
+
+                    <div class="divider"></div>
+                    <div class="item">
+                        <i class="dropdown icon"></i> All applications
+                        <div class="menu" id="apps">
+                            <!--
+        <div class="item">Google Docs</div>
+        <div class="item">Google Drive</div>
+        <div class="item">Dropbox</div>
+        <div class="item">Adobe Creative Cloud</div>
+        <div class="item">Private FTP</div>
+        <div class="item">Another Service...</div> -->
+                            <div class="item"><i class="dropdown icon"></i>Images
+                                <div id="-Images" class="menu"></div>
+                            </div>
+                            <div class="item"><i class="dropdown icon"></i>Txt's
+                                <div id="-Txt's" class="menu"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui icon search input">
+                        <i class="search icon"></i>
+                        <input id="searchapps" type="text" placeholder="Search...">
+                    </div>
+                </div>
+            </div>
+            <!-- end dropdown -->
+
+
+        </div>
+        <div id="pref" class="ui dropdown" tabindex="0" style="position: absolute; left: 306px; top: 182px;">
+            <div class="text"></div>
+            <div class="menu transition hidden" tabindex="-1">
+                <div class="item">
+                    <i class="dropdown icon"></i> New background
+                    <div class="menu transition hidden">
+                        <div class="item">
+                            <i class="dropdown icon"></i> From URL
+                            <div class="menu transition hidden">
+                                <div class="ui labeled input">
+                                    <div class="ui label">
+                                        http://
+                                    </div>
+                                    <input onchange="back_url($(this).val());" type="text" placeholder="mysite.com">
+                                </div>
+                                <button class="ui labeled icon button uploadb" style="margin-left: 27%; margin-bottom: 5px;">
+                                <i class="cloud upload icon"></i>
+                                Upload
+                              </button>
+
+                            </div>
+                        </div>
+                        <div class="item">
+                            <i class="dropdown icon"></i> From harddrive
+                            <div class="menu transition hidden">
+                                <div class="ui input">
+                                    <input onchange="back_file(this)" id="backfile" type="file" accept="image/*">
+                                </div>
+                                <button class="ui labeled icon button uploadb" style="margin-left: 30%; margin-bottom: 5px;">
+                                <i class="cloud upload icon"></i>
+                                Upload
+                              </button>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="file_opt" class="ui dropdown">
+            <div class="text"></div>
+            <div class="menu">
+                <div id="del_file" class="item">Delete</div>
+                <div id="download_file" class="item"><a download="">Download file</a></div>
+            </div>
+        </div>
+    </div>
+    <div class="login_page">
+        <div class="center">
+            <img src="https://d13yacurqjgara.cloudfront.net/users/293489/screenshots/1459984/untitled-2.png" />
+            <input style="top: 320px;" type="text" id="username" placeholder="username" />
+            <input style="top: 345px;" type="password" id="pass" placeholder="password" />
+            <span style="top: 364px; padding: 5px 10px 5px 10px; border-radius: 4px" id="loginButton">login</span>
+        </div>
+    </div>
+
+</body>
+<script>
+    function setup() {
+        noCanvas();
+        os = select('#os');
+        taskbar = select('.taskbar');
+        createP('').parent(taskbar).id('time').style('margin-top', '-30px').style('margin-left', $(window).width() - 140 + 'px');
+        startTime();
+    }
+
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        $('#time').html(today.getDate() + '/' + today.getFullYear() + ' ' + h + ":" + m + ":" + s);
+        var t = setTimeout(startTime, 500);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i
+        }; // add zero in front of numbers < 10
+        return i;
+    }
+    /*
+        function updateTime() {
+            var date = new Date();
+            var date = date.getDate() + '/' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+            createP(date).parent(taskbar);
+            setTimeout(updateTime(), 500);
+        }*/
+</script>
+
+<script src="sos.js"></script>
+
+</html>

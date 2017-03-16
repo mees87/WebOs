@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<style>
+    #custom-bootstrap-menu.navbar-default .navbar-brand {
+        color: rgba(0, 0, 0, 1);
+    }
+
+    #custom-bootstrap-menu.navbar-default {
+        font-size: 17px;
+        background-color: rgba(255, 191, 0, 1);
+        border-bottom-width: 1px;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav>li>a {
+        color: rgba(119, 119, 119, 1);
+        background-color: rgba(248, 248, 248, 0);
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-nav>li>a:focus {
+        color: rgba(51, 51, 51, 1);
+        background-color: rgba(248, 248, 248, 0);
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a,
+    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-nav>.active>a:focus {
+        color: rgba(85, 85, 85, 1);
+        background-color: rgba(255, 170, 0, 1);
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle {
+        border-color: #ffaa00;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+        background-color: #ffaa00;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+        background-color: #ffaa00;
+    }
+
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+    #custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+        background-color: #ffbf00;
+    }
+
+    #signUpForm {
+        margin: 0 auto;
+        margin-top: 60px;
+    }
+
+    #signUpForm span {
+        cursor: pointer;
+        background-color: blue;
+        padding: 5px 10px 5px 10px;
+        border-radius: 4px;
+    }
+
+    #signUpForm span:active {
+        background-color: rgb(50, 50, 200);
+    }
+
+    #signUpForm input {
+        border-radius: 4px;
+    }
+
+    .hide {
+        display: none;
+    }
+</style>
+
+<head>
+    <title>game</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.3/addons/p5.dom.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div id="custom-bootstrap-menu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header"><a class="navbar-brand" href="#">WebOS</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+        </button>
+            </div>
+            <div class="collapse navbar-collapse navbar-menubuilder">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="index.html">Home</a>
+                    </li>
+                    <li><a href="sign-up.html">Sign Up</a>
+                    </li>
+                    <li><a href="login.html">Login</a>
+                    </li>
+                    <li><a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--
+  <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="XJGA8CSQBBTK6">
+      <input type="image" src="https://www.paypalobjects.com/nl_NL/NL/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal, de veilige en complete manier van online betalen.">
+      <img alt="" border="0" src="https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif" width="1" height="1">
+  </form>
+  -->
+
+
+    <div>
+        <table id="signUpForm">
+            <tbody>
+                <tr>
+                    <td><label for="name">Name:</label></td>
+                    <td><input id="name" type="text"></td>
+                </tr>
+                <tr class="test_result hide">
+                    <td style="color:red">Invalid email!</td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email Address:</label></td>
+                    <td><input id="email" type="text"></td>
+                </tr>
+                <tr class="usernameExists hide">
+                    <td style="color:red">Username already exists!</td>
+                </tr>
+                <tr class="usernameEmpty hide">
+                    <td style="color:red">Username empty!</td>
+                </tr>
+                <tr>
+                    <td><label for="username">Username:</label></td>
+                    <td><input id="username" type="text"></td>
+                </tr>
+                <tr class="passNotEqual hide">
+                    <td style="color:red">Passwords don't match!</td>
+                </tr>
+                <tr class="passEmpty hide">
+                    <td style="color:red">Passwords are empty!</td>
+                </tr>
+                <tr class="passToShort hide">
+                    <td style="color:red">Password is to short!</td>
+                </tr>
+                <tr>
+                    <td><label for="pass">Password:</label></td>
+                    <td><input id="pass" type="password"></td>
+                </tr>
+                <tr>
+                    <td><label for="r-pass">Repeat password:</label></td>
+                    <td><input id="r-pass" type="password"></td>
+                </tr>
+                <tr>
+                    <td>Password should be<br>at least 6 characters</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span id="signUp">Sign up</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+</body>
+
+<script>
+    var config = {
+        apiKey: "AIzaSyDBjpfifmxfd5OyJrnamn_hrbZwwD4Axvs",
+        authDomain: "sos-users.firebaseapp.com",
+        databaseURL: "https://sos-users.firebaseio.com",
+        storageBucket: "sos-users.appspot.com",
+        messagingSenderId: "882097385139"
+    };
+    firebase.initializeApp(config);
+
+    /*
+    firebase.database().ref('lol').push({
+      name: "mees"
+
+    });
+    */
+
+
+    /*
+    // Tests to see if /users/<userId> has any data.
+    function checkIfUserExists(userId) {
+      if(!userId==""){
+      var usersRef = firebase.database().ref();
+      usersRef.child(userId).once('value', function(snapshot) {
+        //var exists = (snapshot.val() !== null);
+        if(snapshot.val() !== null){
+          $('.usernameExists').removeClass('hide');
+        }
+      });
+    }else{
+      $('.usernameEmpty').removeClass('hide');
+    }
+    }
+    */
+
+
+
+    $('#signUp').click(function() {
+        var err = false;
+        var name = $('#name').val();
+        var email = $('#email').val();
+        var username = $('#username').val();
+        var pass = $('#pass').val();
+        var r_pass = $('#r-pass').val();
+
+        //email validation
+        var result = $('.test_result');
+        var regExpression = /\b[a-zA-Z0-9\u00C0-\u017F._%+-]+@[a-zA-Z0-9\u00C0-\u017F.-]+\.[a-zA-Z]{2,}\b/;
+        var isValid = regExpression.test(email);
+        if (!isValid) {
+            result.removeClass('hide');
+            err = true;
+        }
+
+        //check if passwords are the same
+        if (!pass == r_pass) {
+            $('.passNotEqual').removeClass('hide');
+            err = true;
+        }
+
+        //check if passwords are empty
+        if (pass == "" && r_pass == "") {
+            $('.passEmpty').removeClass('hide');
+            err = true;
+        }
+
+        //check pass length
+        if (pass.length < 6 || r_pass.length < 6) {
+            $('.passToShort').removeClass('hide');
+            err = true;
+        }
+
+        //check if username is already in database
+        if (!username == "") {
+            var usersRef = firebase.database().ref();
+            usersRef.child(username).once('value', function(snapshot) {
+                //var exists = (snapshot.val() !== null);
+                if (snapshot.val() !== null) {
+                    $('.usernameExists').removeClass('hide');
+                    err = true;
+                }
+            });
+        } else {
+            $('.usernameEmpty').removeClass('hide');
+        }
+        //  checkIfUserExists(username);
+
+        //stop if err
+        if (err) {
+            return false;
+        }
+
+        //real sign up process
+        var promise = firebase.auth().createUserWithEmailAndPassword(email, pass);
+        promise.catch(err => {
+            console.log(err);
+        }).then(function() {
+            firebase.database().ref(username).push({
+                name: name,
+                email: email,
+                background: {
+                    123: 'default'
+                },
+                settings: {
+                    'background-repeat': true,
+                    'background-repeat-x': true,
+                    'background-repeat-y': true,
+                    'background-size': 'auto',
+                    'color-theme': 'default'
+                }
+
+            });
+        });
+    });
+</script>
+
+</html>
